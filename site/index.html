@@ -239,7 +239,7 @@ footer{padding-block:28px 40px;border-top:1px solid var(--rule);display:flex;jus
   <div class="ch-head">
     <div class="label">02 · Journey</div>
     <div>
-      <h2 id="h-journey">Seven stations, <b>one traverse.</b></h2>
+      <h2 id="h-journey">Eight stations, <b>one traverse.</b></h2>
       <p>Each point is plotted at its real latitude and longitude. Select a station to read its entry.</p>
     </div>
   </div>
@@ -451,6 +451,7 @@ footer{padding-block:28px 40px;border-top:1px solid var(--rule);display:flex;jus
     {n:'Kumasi',c:'Ghana',lat:6.69,lon:-1.57,yr:'2009',t:'BSc Business Administration at KNUST School of Business, First Class Honours.'},
     {n:'London',c:'United Kingdom',lat:51.51,lon:-0.13,yr:'2013–2015',t:'MSc Development Management at LSE; Cocoa Life value-chain research with CARE International; founding member of the LSE Africa Summit.'},
     {n:'Lancaster',c:'United Kingdom',lat:54.05,lon:-2.80,yr:'2019',t:'MBA at Lancaster University while leading business development at Trimble.'},
+    {n:'Accra',c:'Ghana',lat:5.60,lon:-0.19,yr:'2024–2025',t:'Based in Accra as a freelance consultant, leading go-to-market and market sizing for Vela Sustainability Technologies across 18 African countries.'},
     {n:'Nairobi',c:'Kenya',lat:-1.29,lon:36.82,yr:'2025–2026',t:'Led Leica Geosystems across East and Central Africa: a $10.2M region and a 23-person team.'},
     {n:'Accra',c:'Ghana',lat:5.60,lon:-0.19,yr:'2026',t:'Back in Accra after Nairobi, before moving to the United States for graduate school.'},
     {n:'Philadelphia',c:'United States',lat:39.95,lon:-75.19,yr:'2026–',t:'Master of Urban Spatial Analytics at Penn as a Stuart Weitzman Scholar.'}
@@ -474,7 +475,7 @@ footer{padding-block:28px 40px;border-top:1px solid var(--rule);display:flex;jus
   }
   const list=document.getElementById('stops');
   S.forEach((s,i)=>{const b=document.createElement('button');b.className='stop';b.type='button';
-    b.innerHTML=`<span class="no">${String(i+1).padStart(2,'0')}</span><span><h3>${s.n}, ${s.c}</h3><span class="c">${s.lat.toFixed(2)}°${s.lat>=0?'N':'S'}, ${Math.abs(s.lon).toFixed(2)}°${s.lon<0?'W':'E'}</span><p>${s.t}</p></span>`;
+    b.innerHTML=`<span class="no">${String(i+1).padStart(2,'0')}</span><span><h3>${s.n}, ${s.c}</h3><span class="c">${s.lat.toFixed(2)}°${s.lat>=0?'N':'S'}, ${Math.abs(s.lon).toFixed(2)}°${s.lon<0?'W':'E'} · ${s.yr}</span><p>${s.t}</p></span>`;
     b.addEventListener('click',()=>select(i));list.appendChild(b)});
   function select(i){active=i;[...list.children].forEach((b,k)=>{b.classList.toggle('on',k===i);b.setAttribute('aria-pressed',k===i)});plot()}
   select(S.length-1);
