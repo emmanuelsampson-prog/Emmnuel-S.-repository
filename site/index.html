@@ -69,7 +69,7 @@ nav.top a.nl:hover{color:var(--ink)}
 .hero h1{font-size:clamp(44px,7vw,96px);line-height:.9;font-weight:900;font-stretch:112%;letter-spacing:-.03em;margin-top:18px}
 .hero h1 em{font-style:normal;color:var(--accent);font-stretch:70%;font-weight:700}
 .lede{font-size:clamp(20px,2.3vw,25px);line-height:1.4;max-width:30ch;margin:22px 0 0}
-.portrait{max-width:260px;margin:0 0 14px auto;border:1px solid var(--ink);background:#fff;position:relative}
+.portrait{max-width:210px;margin:0 0 14px auto;border:1px solid var(--ink);background:#fff;position:relative}
 .portrait img{display:block;width:100%;height:auto;aspect-ratio:720/840;object-fit:cover}
 .portrait figcaption{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px}
 .side{max-width:330px;width:100%;justify-self:end}
@@ -239,7 +239,7 @@ footer{padding-block:28px 40px;border-top:1px solid var(--rule);display:flex;jus
   <div class="ch-head">
     <div class="label">02 · Journey</div>
     <div>
-      <h2 id="h-journey">Six stations, <b>one traverse.</b></h2>
+      <h2 id="h-journey">Eight stations, <b>one traverse.</b></h2>
       <p>Each point is plotted at its real latitude and longitude. Select a station to read its entry.</p>
     </div>
   </div>
@@ -451,7 +451,9 @@ footer{padding-block:28px 40px;border-top:1px solid var(--rule);display:flex;jus
     {n:'Kumasi',c:'Ghana',lat:6.69,lon:-1.57,yr:'2009',t:'BSc Business Administration at KNUST School of Business, First Class Honours.'},
     {n:'London',c:'United Kingdom',lat:51.51,lon:-0.13,yr:'2013–2015',t:'MSc Development Management at LSE; Cocoa Life value-chain research with CARE International; founding member of the LSE Africa Summit.'},
     {n:'Lancaster',c:'United Kingdom',lat:54.05,lon:-2.80,yr:'2019',t:'MBA at Lancaster University while leading business development at Trimble.'},
+    {n:'Accra',c:'Ghana',lat:5.60,lon:-0.19,yr:'2024–2025',t:'Based in Accra as a freelance consultant, leading go-to-market and market sizing for Vela Sustainability Technologies across 18 African countries.'},
     {n:'Nairobi',c:'Kenya',lat:-1.29,lon:36.82,yr:'2025–2026',t:'Led Leica Geosystems across East and Central Africa: a $10.2M region and a 23-person team.'},
+    {n:'Accra',c:'Ghana',lat:5.60,lon:-0.19,yr:'2026',t:'Back in Accra after Nairobi, before moving to the United States for graduate school.'},
     {n:'Philadelphia',c:'United States',lat:39.95,lon:-75.19,yr:'2026–',t:'Master of Urban Spatial Analytics at Penn as a Stuart Weitzman Scholar.'}
   ];
   let active=5;
@@ -465,8 +467,9 @@ footer{padding-block:28px 40px;border-top:1px solid var(--rule);display:flex;jus
     let d='';S.forEach((s,i)=>{const x=X(s.lon),y=Y(s.lat);if(i===0)d=`M${x},${y}`;else{const p=S[i-1],px=X(p.lon),py=Y(p.lat),mx=(px+x)/2,my=Math.min(py,y)-40;d+=` Q${mx},${my} ${x},${y}`}});
     h+=`<path d="${d}" fill="none" stroke="${acc}" stroke-width="1.6" stroke-dasharray="5 4"/>`;
     S.forEach((s,i)=>{const x=X(s.lon),y=Y(s.lat),on=i===active;
-      const lx = s.n==='Kumasi'? x+10 : s.n==='Obuasi'? x+10 : x+10, ly = s.n==='Obuasi'? y+16 : s.n==='Kumasi'? y-6 : s.n==='Lancaster'? y-8 : y+4;
-      h+=`<g data-i="${i}" style="cursor:pointer">${on?`<circle cx="${x}" cy="${y}" r="11" fill="none" stroke="${fix}" stroke-width="2"/>`:''}<circle cx="${x}" cy="${y}" r="${on?6:4.5}" fill="${on?acc:ink}"/><text x="${s.n==='Philadelphia'?x-12:lx}" y="${s.n==='Philadelphia'?y-14:ly}" font-size="12" font-family="Archivo,Arial,sans-serif" font-weight="${on?700:500}" fill="${on?acc:ink}" text-anchor="${s.n==='Philadelphia'?'start':'start'}">${s.n}</text></g>`});
+      const P={Obuasi:[-10,14,'end'],Kumasi:[-10,-6,'end'],Accra:[10,14,'start'],Lancaster:[10,-8,'start'],Philadelphia:[-12,-14,'start']}[s.n]||[10,4,'start'];
+      const first=S.findIndex(q=>q.n===s.n)===i;
+      h+=`<g data-i="${i}" style="cursor:pointer">${on?`<circle cx="${x}" cy="${y}" r="11" fill="none" stroke="${fix}" stroke-width="2"/>`:''}<circle cx="${x}" cy="${y}" r="${on?6:4.5}" fill="${on?acc:ink}"/>${first||on?`<text x="${x+P[0]}" y="${y+P[1]}" font-size="12" font-family="Archivo,Arial,sans-serif" font-weight="${on?700:500}" fill="${on?acc:ink}" text-anchor="${P[2]}">${s.n}</text>`:''}</g>`});
     svg.innerHTML=h;
     svg.querySelectorAll('g[data-i]').forEach(g=>g.addEventListener('click',()=>select(+g.dataset.i)));
   }
@@ -475,7 +478,7 @@ footer{padding-block:28px 40px;border-top:1px solid var(--rule);display:flex;jus
     b.innerHTML=`<span class="no">${String(i+1).padStart(2,'0')}</span><span><h3>${s.n}, ${s.c}</h3><span class="c">${s.lat.toFixed(2)}°${s.lat>=0?'N':'S'}, ${Math.abs(s.lon).toFixed(2)}°${s.lon<0?'W':'E'} · ${s.yr}</span><p>${s.t}</p></span>`;
     b.addEventListener('click',()=>select(i));list.appendChild(b)});
   function select(i){active=i;[...list.children].forEach((b,k)=>{b.classList.toggle('on',k===i);b.setAttribute('aria-pressed',k===i)});plot()}
-  select(5);
+  select(S.length-1);
 
   /* ---------- coordinate game ---------- */
   const C=[
