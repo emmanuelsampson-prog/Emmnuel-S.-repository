@@ -474,7 +474,7 @@ footer{padding-block:28px 40px;border-top:1px solid var(--rule);display:flex;jus
   }
   const list=document.getElementById('stops');
   S.forEach((s,i)=>{const b=document.createElement('button');b.className='stop';b.type='button';
-    b.innerHTML=`<span class="no">${String(i+1).padStart(2,'0')}</span><span><h3>${s.n}, ${s.c}</h3><span class="c">${s.lat.toFixed(2)}°${s.lat>=0?'N':'S'}, ${Math.abs(s.lon).toFixed(2)}°${s.lon<0?'W':'E'} · ${s.yr}</span><p>${s.t}</p></span>`;
+    b.innerHTML=`<span class="no">${String(i+1).padStart(2,'0')}</span><span><h3>${s.n}, ${s.c}</h3><span class="c">${s.lat.toFixed(2)}°${s.lat>=0?'N':'S'}, ${Math.abs(s.lon).toFixed(2)}°${s.lon<0?'W':'E'}</span><p>${s.t}</p></span>`;
     b.addEventListener('click',()=>select(i));list.appendChild(b)});
   function select(i){active=i;[...list.children].forEach((b,k)=>{b.classList.toggle('on',k===i);b.setAttribute('aria-pressed',k===i)});plot()}
   select(S.length-1);
