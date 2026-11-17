@@ -123,6 +123,9 @@ section.ch{padding-block:88px;border-top:1px solid var(--rule)}
 .proj .meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .proj h3{font-size:24px;font-weight:750;font-stretch:104%;line-height:1.1}
 .proj p{margin:0;font-size:17px}
+.proj h3 a{text-decoration:none}
+.proj h3 a:hover{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.proj h3 a::after{content:" ↗";font-size:.6em;color:var(--accent)}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
 .tag{font-family:var(--mono);font-size:12px;padding:3px 8px;border:1px solid var(--rule);border-radius:3px;color:var(--ink-2)}
 .pill{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px}
@@ -259,6 +262,12 @@ footer{padding-block:28px 40px;border-top:1px solid var(--rule);display:flex;jus
     </div>
   </div>
   <div class="work">
+    <article class="proj">
+      <div class="meta"><span class="label">Philadelphia · Health access</span><span class="pill done">Published</span></div>
+      <h3><a href="https://emmanuelsampson-prog.github.io/pharmacy-access-philadelphia/" target="_blank" rel="noopener">What happened to pharmacy access when Rite Aid left?</a></h3>
+      <p>Traces 41 closure locations from court filings and company records, then routes trips from 62 neighbourhoods to each former store and its designated receiving pharmacy: the average modelled walk rises from 9 to 16 minutes.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Network routing</span><span class="tag">OpenStreetMap</span><span class="tag">Census ACS</span></div>
+    </article>
     <article class="proj">
       <div class="meta"><span class="label">Philadelphia · Python</span><span class="pill live">In progress</span></div>
       <h3>Where should the next Indego station go?</h3>
