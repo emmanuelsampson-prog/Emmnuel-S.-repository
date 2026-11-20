@@ -2,7 +2,8 @@
 
 Live at https://www.emmanuelsampson.com (GitHub Pages, no build step).
 
-- `index.html` — the site (photo embedded)
+- `index.html` — the academic site (images in `assets/`)
+- `professional/` — the professional profile and résumé
 - `Emmanuel_Sampson_CV.pdf` — linked from the CV buttons; replace with a file of the same name to update
 - `CNAME` — custom domain for GitHub Pages
 - `site/` — redirect from the old /site/ address
